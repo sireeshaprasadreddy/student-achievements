@@ -3,8 +3,8 @@
  * Use the Project URL and the publishable/anon key ONLY.
  * NEVER put a Supabase service_role/secret key in this browser file.
  */
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY_HERE";
+const SUPABASE_URL = "https://tsqmddzpoxghdepjhyts.supabase.co/rest/v1/";
+const SUPABASE_ANON_KEY = "sb_publishable_9vncr6kn5y_7KCiUB2jn_Q_Vfw9Uvkb";
 const BUCKET = "certificates";
 const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
