@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VCE IT Student Achievements Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-mark">VCE</div>
+    <div>
+      <h1>IT Student Achievements Portal</h1>
+      <p>Vasavi College of Engineering · Department of Information Technology</p>
+    </div>
+  </header>
+  <main class="container">
+    <div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+    <section id="setup-warning" class="panel warning hidden">
+      <h2>Setup required</h2>
+      <p>Connect this portal to your Supabase project by editing the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> values near the top of <code>app.js</code>. Follow <code>README.md</code> before using this portal.</p>
+    </section>
+
+    <section id="auth-panel" class="panel hidden">
+      <div class="tabs">
+        <button type="button" class="tab active" id="show-login">Sign in</button>
+        <button type="button" class="tab" id="show-signup">Student registration</button>
+      </div>
+      <form id="login-form" class="form-grid">
+        <h2>Sign in</h2>
+        <label>Email address<input id="login-email" type="email" autocomplete="username" required></label>
+        <label>Password<input id="login-password" type="password" autocomplete="current-password" required minlength="8"></label>
+        <button class="primary" type="submit">Sign in</button>
+        <p class="muted">Faculty accounts must be created by the portal administrator and assigned the faculty role.</p>
+      </form>
+      <form id="signup-form" class="form-grid hidden">
+        <h2>Student registration</h2>
+        <label>Full name<input id="signup-name" type="text" maxlength="100" required></label>
+        <label>College email<input id="signup-email" type="email" autocomplete="email" required></label>
+        <label>Create password (at least 8 characters)<input id="signup-password" type="password" autocomplete="new-password" minlength="8" required></label>
+        <label>Roll number<input id="signup-roll" type="text" maxlength="30" required></label>
+        <label>Section
+          <select id="signup-section" required>
+            <option value="">Select section</option><option>IT-A</option><option>IT-B</option><option>IT-C</option><option>Other</option>
+          </select>
+        </label>
+        <button class="primary" type="submit">Create student account</button>
+        <p class="muted">Use a college-approved email address. If email confirmation is enabled in Supabase, confirm your email before signing in.</p>
+      </form>
+    </section>
+
+    <section id="app-panel" class="hidden">
+      <div class="panel account-bar">
+        <div><strong id="welcome"></strong><p id="account-role" class="muted"></p></div>
+        <button id="signout" class="secondary" type="button">Sign out</button>
+      </div>
+
+      <section id="student-panel" class="panel hidden">
+        <h2>Submit a participation certificate</h2>
+        <p class="muted">Submit one record per event. Upload PDF, JPG, or PNG (maximum 5 MB).</p>
+        <form id="submission-form" class="form-grid">
+          <label>Event / activity name<input id="event-name" type="text" maxlength="150" required></label>
+          <label>Event date<input id="event-date" type="date" required></label>
+          <label>Participation type
+            <select id="event-type" required>
+              <option value="">Select type</option>
+              <option>Hackathon</option><option>Technical Event</option><option>Workshop / Training</option>
+              <option>Conference / Paper Presentation</option><option>Competition</option><option>Internship</option><option>Other</option>
+            </select>
+          </label>
+          <label>Organiser (optional)<input id="organiser" type="text" maxlength="150"></label>
+          <label>Certificate file<input id="certificate-file" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></label>
+          <button class="primary" type="submit">Submit for faculty verification</button>
+        </form>
+        <h2 class="section-heading">My submissions</h2>
+        <div id="student-submissions" class="table-wrap"></div>
+      </section>
+
+      <section id="faculty-panel" class="panel hidden">
+        <h2>Faculty verification</h2>
+        <p class="muted">Review student-submitted certificates. Approve or reject each record. Add a reason when rejecting.</p>
+        <div class="filters">
+          <label>Verification status
+            <select id="faculty-filter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+          </label>
+          <label>Section
+            <select id="section-filter"><option value="all">All sections</option><option>IT-A</option><option>IT-B</option><option>IT-C</option><option>Other</option></select>
+          </label>
+          <button id="refresh-faculty" class="secondary" type="button">Refresh records</button>
+          <button id="export-csv" class="secondary" type="button">Export filtered CSV</button>
+        </div>
+        <div id="faculty-submissions" class="table-wrap"></div>
+      </section>
+    </section>
+
+    <section class="footer-note">
+      <strong>Privacy notice:</strong> Use only authorised college accounts and legitimate student records. Access is controlled by Supabase authentication and database policies. Configure your institution's data-retention and consent practices before official use.
+    </section>
+  </main>
+  <footer>Vasavi College of Engineering · IT Department</footer>
+</body>
+</html>
